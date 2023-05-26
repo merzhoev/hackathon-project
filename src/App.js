@@ -7,11 +7,14 @@ import { AuthenticationPage } from "pages/AuthenticationPage";
 import { AuthLayout } from "layouts/AuthLayout";
 import { FarmerLayout } from "layouts/FarmerLayout";
 import { $api } from "api/services";
+import { ChatPage } from "pages/ChatPage";
 
 function App() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.user)
   const isAuth = user !== null;
+
+  console.log(user)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,6 +24,8 @@ function App() {
         .then(({ data }) => dispatch(userActions.setUser(data)))
     }
   }, []);
+
+  console.log(user)
 
   // arbimerhzoev@mail.ru
   return (
