@@ -10,13 +10,12 @@ import { MarketPage } from "pages/MarketPage";
 import { $api } from "api/services";
 import { ChatPage } from "pages/ChatPage";
 import { FarmersPage } from "pages/Farmers";
+import { CartPage } from "pages/CartPage";
 
 function App() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.user)
   const isAuth = user !== null;
-
-  console.log(user)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -26,8 +25,6 @@ function App() {
         .then(({ data }) => dispatch(userActions.setUser(data)))
     }
   }, []);
-
-  console.log(user)
 
   // arbimerhzoev@mail.ru
   return (
@@ -41,6 +38,7 @@ function App() {
               <Route path="/chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="/farmers" element={<FarmersPage />} />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : user.role === "farmer" ? (

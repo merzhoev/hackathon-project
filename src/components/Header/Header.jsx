@@ -31,11 +31,13 @@ import {
   IconChevronDown,
   IconAdjustments,
   IconUser,
+  IconShoppingCartDiscount,
+  IconShoppingCart,
 } from '@tabler/icons-react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userActions } from 'store/slices/userSlice';
-import Logo from "assets/images/Logo.svg";
+import Logo from 'assets/images/Logo.svg';
 
 const useStyles = createStyles((theme) => {
   return {
@@ -164,8 +166,8 @@ export function HeaderMegaMenu({ role }) {
     <Box pb={80}>
       <Header height={60} px="md">
         <Container size="lg" className={classes.headerInner}>
-          <Group position="apart" sx={{ height: "100%" }}>
-            <Link to={"/"}>
+          <Group position="apart" sx={{ height: '100%' }}>
+            <Link to={'/'}>
               <img
                 src={Logo}
                 style={{
@@ -175,16 +177,11 @@ export function HeaderMegaMenu({ role }) {
                 alt="Logo"
               />
             </Link>
-            <Group
-              sx={{ height: "100%" }}
-              spacing={0}
-              className={classes.hiddenMobile}
-            >
-
-              <Link to="#" className={classes.link}>
+            <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
+              <Link to="/" className={classes.link}>
                 Маркет
               </Link>
-              <Link to={"farmers"} className={classes.link}>
+              <Link to={'farmers'} className={classes.link}>
                 Фермеры
               </Link>
               {role === 'farmer' && (
@@ -203,9 +200,11 @@ export function HeaderMegaMenu({ role }) {
             </Group>
 
             <Group className={classes.hiddenMobile}>
-              <ActionIcon>
-                <IconUser size="1.5rem" />
-              </ActionIcon>
+              <Link to="/cart">
+                <ActionIcon>
+                  <IconShoppingCart size="1.5rem" />
+                </ActionIcon>
+              </Link>
               <Button variant="default" onClick={onLogout}>
                 Выйти
               </Button>
@@ -229,26 +228,29 @@ export function HeaderMegaMenu({ role }) {
         zIndex={1000000}>
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
-          <Link to="#" className={classes.link}>
+          <Link onClick={closeDrawer} to="/" className={classes.link}>
             Маркет
           </Link>
-          <Link to={"farmers"} className={classes.link}>
+          <Link onClick={closeDrawer} to={'farmers'} className={classes.link}>
             Фермеры
           </Link>
           {role === 'farmer' && (
-            <Link to="#" className={classes.link}>
+            <Link onClick={closeDrawer} to="#" className={classes.link}>
               Мои товары
             </Link>
           )}
-          <Link to="chats" className={classes.link}>
+          <Link onClick={closeDrawer} to="chats" className={classes.link}>
             Чат
           </Link>
           {role === 'farmer' && (
-            <Link to="#" className={classes.link}>
+            <Link onClick={closeDrawer} to="#" className={classes.link}>
               Фермерам
             </Link>
           )}
-          <Link to="#" className={classes.link}>
+          <Link onClick={closeDrawer} to="/cart" className={classes.link}>
+            Корзина
+          </Link>
+          <Link onClick={closeDrawer} to="#" className={classes.link}>
             Профиль
           </Link>
 
