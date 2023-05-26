@@ -18,6 +18,7 @@ import {
   ScrollArea,
   rem,
   Container,
+  ActionIcon,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
@@ -28,6 +29,8 @@ import {
   IconFingerprint,
   IconCoin,
   IconChevronDown,
+  IconAdjustments,
+  IconUser,
 } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => {
@@ -128,7 +131,7 @@ const mockdata = [
   },
 ];
 
-export function HeaderMegaMenu() {
+export function HeaderMegaMenu({ role }) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
@@ -160,62 +163,30 @@ export function HeaderMegaMenu() {
 
             <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
               <a href="#" className={classes.link}>
-                Home
-              </a>
-              <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
-                <HoverCard.Target>
-                  <a href="#" className={classes.link}>
-                    <Center inline>
-                      <Box component="span" mr={5}>
-                        Features
-                      </Box>
-                      <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-                    </Center>
-                  </a>
-                </HoverCard.Target>
-
-                <HoverCard.Dropdown sx={{ overflow: 'hidden' }}>
-                  <Group position="apart" px="md">
-                    <Text fw={500}>Features</Text>
-                    <Anchor href="#" fz="xs">
-                      View all
-                    </Anchor>
-                  </Group>
-
-                  <Divider
-                    my="sm"
-                    mx="-md"
-                    color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
-                  />
-
-                  <SimpleGrid cols={2} spacing={0}>
-                    {links}
-                  </SimpleGrid>
-
-                  <div className={classes.dropdownFooter}>
-                    <Group position="apart">
-                      <div>
-                        <Text fw={500} fz="sm">
-                          Get started
-                        </Text>
-                        <Text size="xs" color="dimmed">
-                          Their food sources have decreased, and their numbers
-                        </Text>
-                      </div>
-                      <Button variant="default">Get started</Button>
-                    </Group>
-                  </div>
-                </HoverCard.Dropdown>
-              </HoverCard>
-              <a href="#" className={classes.link}>
-                Learn
+                Маркет
               </a>
               <a href="#" className={classes.link}>
-                Academy
+                Фермеры
               </a>
+              {role === 'farmer' && (
+                <a href="#" className={classes.link}>
+                  Мои товары
+                </a>
+              )}
+              <a href="#" className={classes.link}>
+                Чат
+              </a>
+              {role === 'farmer' && (
+                <a href="#" className={classes.link}>
+                  Фермерам
+                </a>
+              )}
             </Group>
 
             <Group className={classes.hiddenMobile}>
+              <ActionIcon>
+                <IconUser size="1.5rem" />
+              </ActionIcon>
               <Button variant="default">Выйти</Button>
             </Group>
             <Burger
@@ -232,29 +203,33 @@ export function HeaderMegaMenu() {
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        title="Navigation"
+        title="Навигация"
         className={classes.hiddenDesktop}
         zIndex={1000000}>
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
           <a href="#" className={classes.link}>
-            Home
-          </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
-            <Center inline>
-              <Box component="span" mr={5}>
-                Features
-              </Box>
-              <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-            </Center>
-          </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
-            Learn
+            Маркет
           </a>
           <a href="#" className={classes.link}>
-            Academy
+            Фермеры
+          </a>
+          {role === 'farmer' && (
+            <a href="#" className={classes.link}>
+              Мои товары
+            </a>
+          )}
+          <a href="#" className={classes.link}>
+            Чат
+          </a>
+          {role === 'farmer' && (
+            <a href="#" className={classes.link}>
+              Фермерам
+            </a>
+          )}
+          <a href="#" className={classes.link}>
+            Профиль
           </a>
 
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
