@@ -11,7 +11,7 @@ import {
   IconBrandYoutube,
   IconBrandInstagram,
 } from "@tabler/icons-react";
-import Logo from "assets/image/Logo.svg";
+import Logo from "assets/images/Logo.svg";
 import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
