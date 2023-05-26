@@ -10,9 +10,11 @@ import {
   Anchor,
   rem,
   Stack,
+  Tabs,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
+import { useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -43,6 +45,7 @@ const useStyles = createStyles((theme) => ({
 
 export function AuthenticationPage() {
   const { classes } = useStyles();
+  const [role, setRole] = useState({ value: 'farmer', title: 'Фермер' });
   const [type, toggleType] = useToggle([
     { value: 'login', title: 'Вход', buttonTitle: 'Зарегистрироваться' },
     { value: 'register', title: 'Регистрация', buttonTitle: 'Войти' },
@@ -59,6 +62,15 @@ export function AuthenticationPage() {
       password: (val) => (val.length < 6 ? 'Пароль должен содержать не менее 6 символов' : null),
     },
   });
+
+  const toggleRole = () => {
+    const newRole =
+      role.value === 'farmer'
+        ? { value: 'user', title: 'Пользователь' }
+        : { value: 'farmer', title: 'Фермер' };
+
+    setRole(newRole);
+  };
 
   const onToggleType = (event) => {
     event.preventDefault();
@@ -79,9 +91,35 @@ export function AuthenticationPage() {
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30}>
-        <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
-          {type.title}
-        </Title>
+        {type.value === 'login' ? (
+          <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
+            {type.title}
+          </Title>
+        ) : (
+          <>
+            <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
+              {type.title}
+            </Title>
+            <Tabs defaultValue="user">
+              <Tabs.List>
+                <Tabs.Tab sx={{ width: '50%' }} value="user">
+                  Пользователь
+                </Tabs.Tab>
+                <Tabs.Tab sx={{ width: '50%' }} value="farmer">
+                  Фермер
+                </Tabs.Tab>
+              </Tabs.List>
+
+              <Tabs.Panel value="user" pt="xs">
+                user login
+              </Tabs.Panel>
+
+              <Tabs.Panel value="farmer" pt="xs">
+                farmer login
+              </Tabs.Panel>
+            </Tabs>
+          </>
+        )}
 
         <form onSubmit={form.onSubmit(onFormSubmit)}>
           <Stack>

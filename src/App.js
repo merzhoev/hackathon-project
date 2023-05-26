@@ -5,15 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginThunk, userActions } from "store/slices/userSlice";
 import { AuthenticationPage } from "pages/AuthenticationPage";
 import { AuthLayout } from "layouts/AuthLayout";
-
-const fakeFetchUser = (ms) => {
-  return new Promise(res => setTimeout(res, ms, { token: 'some_access_token', name: 'alex', age: 20 }))
-}
+import { FarmerLayout } from "layouts/FarmerLayout";
 
 function App() {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.user.user)
-  const isAuth = true;
+  // const user = useSelector(state => state.user.user)
+  const user = { role: 'user' }
+  const isAuth = user !== null;
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -33,11 +31,26 @@ function App() {
     <div className="app">
       <Routes>
         {isAuth ? (
-          <Route path={'/'} element={<AuthLayout />}>
-            <Route index element={<div>home page</div>} />
-            <Route path="/login" element={<Navigate to={'/'} />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Route>
+          user.role === 'user' ? (
+            <Route path={'/'} element={<AuthLayout />}>
+              <Route index element={<div>home page</div>} />
+              <Route path="/login" element={<Navigate to={'/'} />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          ) : user.role === 'farmer' ? (
+            <Route path={'/'} element={<FarmerLayout />}>
+              <Route index element={<div>home page</div>} />
+              <Route path="/login" element={<Navigate to={'/'} />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          ) : user.role === 'admin' ? (
+            <Route path={'/'} element={<FarmerLayout />}>
+              <Route index element={<div>home page</div>} />
+              <Route path="/login" element={<Navigate to={'/'} />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          ) : null
+
         ) : (
           <>
             <Route path={'/login'} element={<AuthenticationPage />} />
