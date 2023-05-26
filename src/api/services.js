@@ -6,7 +6,11 @@ export const $api = {
   },
 
   register(body) {
-    return instance.post('auth/register', body);
+    return instance.post('users', body);
+  },
+
+  getMe() {
+    return instance.post('auth/me')
   }
 }
 
