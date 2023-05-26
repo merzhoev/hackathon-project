@@ -31,8 +31,9 @@ import {
   IconChevronDown,
   IconAdjustments,
   IconUser,
-} from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+} from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
+
 
 const useStyles = createStyles((theme) => {
   return {
@@ -171,18 +172,13 @@ export function HeaderMegaMenu({ role }) {
     <Box pb={80}>
       <Header height={60} px="md">
         <Container size="lg" className={classes.headerInner}>
-          <Group position="apart" sx={{ height: "100%" }}>
-            <p>Logo</p>
+          <Group position="apart" sx={{ height: '100%' }}>
+            <Link to='/'><p>Logo</p></Link>
 
-            <Group
-              sx={{ height: "100%" }}
-              spacing={0}
-              className={classes.hiddenMobile}
-            >
-              <Link to="#" className={classes.link}>
-                Маркет
-              </Link>
-              <Link to="#" className={classes.link}>
+            <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
+              <Link className={classes.link} to='/'>Маркет</Link>
+              <a href="#" className={classes.link}>
+
                 Фермеры
               </Link>
               {role === "farmer" && (
@@ -225,14 +221,12 @@ export function HeaderMegaMenu({ role }) {
         zIndex={1000000}
       >
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
-          <Link to="#" className={classes.link}>
-            Маркет
-          </Link>
-          <Link to="#" className={classes.link}>
+
+          <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
+
+          <Link className={classes.link} to='/'>Маркет</Link>
+          <a href="#" className={classes.link}>
+
             Фермеры
           </Link>
           {role === "farmer" && (

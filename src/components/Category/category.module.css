@@ -1,0 +1,21 @@
+.category {
+  background-size: cover;
+  height: 10.75rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: antiquewhite;
+  font-weight: 600;
+}
+
+/* .backgroundblock{
+    position: absolute;
+    background: #000;
+    opacity: 0.5;
+    height: 10.75rem;
+} */

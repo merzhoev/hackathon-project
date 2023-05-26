@@ -6,6 +6,7 @@ import { loginThunk, userActions } from "store/slices/userSlice";
 import { AuthenticationPage } from "pages/AuthenticationPage";
 import { AuthLayout } from "layouts/AuthLayout";
 import { FarmerLayout } from "layouts/FarmerLayout";
+import { MarketPage } from "pages/MarketPage";
 import { $api } from "api/services";
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
         {isAuth ? (
           user.role === "user" ? (
             <Route path={"/"} element={<AuthLayout />}>
-              <Route index element={<div>home page</div>} />
+              <Route index element={<MarketPage />} />
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="/chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
@@ -37,7 +38,8 @@ function App() {
             </Route>
           ) : user.role === "farmer" ? (
             <Route path={"/"} element={<FarmerLayout />}>
-              <Route index element={<div>home page</div>} />
+
+              <Route index element={<MarketPage />} />
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
@@ -45,6 +47,7 @@ function App() {
             </Route>
           ) : user.role === "admin" ? (
             <Route path={"/"} element={<FarmerLayout />}>
+              <Route index element={<MarketPage />} />
               <Route index element={<div>home page</div>} />
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="chats" element={<ChatPage />} />
