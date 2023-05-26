@@ -7,27 +7,23 @@ import { AuthenticationPage } from "pages/AuthenticationPage";
 import { AuthLayout } from "layouts/AuthLayout";
 import { FarmerLayout } from "layouts/FarmerLayout";
 import { MarketPage } from "pages/MarketPage";
+import { $api } from "api/services";
 
 function App() {
-  const dispatch = useDispatch();
-  // const user = useSelector(state => state.user.user)
-  const user = { role: "user" };
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user.user)
   const isAuth = user !== null;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      // fetch user by token
-      // fakeFetchUser(2000).then((user) => {
-      //   dispatch(userActions.setUser(user))
-      // })
+      $api.getMe()
+        .then(({ data }) => dispatch(userActions.setUser(data)))
     }
   }, []);
 
-  // TODO
-  // Показывать роуты в зависимости от isAuth
-  // Так же показывать индикатор загрузки (создать компонент), пока идет запрос на сервер
+  // arbimerhzoev@mail.ru
   return (
     <div className="app">
       <Routes>
@@ -36,18 +32,26 @@ function App() {
             <Route path={"/"} element={<AuthLayout />}>
               <Route index element={<MarketPage />} />
               <Route path="/login" element={<Navigate to={"/"} />} />
+              <Route path="/chats" element={<ChatPage />} />
+              <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : user.role === "farmer" ? (
             <Route path={"/"} element={<FarmerLayout />}>
+
               <Route index element={<MarketPage />} />
               <Route path="/login" element={<Navigate to={"/"} />} />
+              <Route path="chats" element={<ChatPage />} />
+              <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : user.role === "admin" ? (
             <Route path={"/"} element={<FarmerLayout />}>
               <Route index element={<MarketPage />} />
+              <Route index element={<div>home page</div>} />
               <Route path="/login" element={<Navigate to={"/"} />} />
+              <Route path="chats" element={<ChatPage />} />
+              <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : null
