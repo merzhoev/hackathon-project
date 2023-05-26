@@ -19,8 +19,8 @@ import {
   rem,
   Container,
   ActionIcon,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
   IconNotification,
   IconCode,
@@ -31,68 +31,80 @@ import {
   IconChevronDown,
   IconAdjustments,
   IconUser,
-} from '@tabler/icons-react';
+} from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme) => {
   return {
     headerInner: {
-      height: 'inherit',
+      height: "inherit",
     },
     link: {
-      display: 'flex',
-      alignItems: 'center',
-      height: '100%',
+      display: "flex",
+      alignItems: "center",
+      height: "100%",
       paddingLeft: theme.spacing.md,
       paddingRight: theme.spacing.md,
-      textDecoration: 'none',
-      color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+      textDecoration: "none",
+      color: theme.colorScheme === "dark" ? theme.white : theme.black,
       fontWeight: 500,
       fontSize: theme.fontSizes.sm,
 
-      [theme.fn.smallerThan('sm')]: {
+      [theme.fn.smallerThan("sm")]: {
         height: rem(42),
-        display: 'flex',
-        alignItems: 'center',
-        width: '100%',
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
       },
 
       ...theme.fn.hover({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+        backgroundColor:
+          theme.colorScheme === "dark"
+            ? theme.colors.dark[6]
+            : theme.colors.gray[0],
       }),
     },
 
     subLink: {
-      width: '100%',
+      width: "100%",
       padding: `${theme.spacing.xs} ${theme.spacing.md}`,
       borderRadius: theme.radius.md,
 
       ...theme.fn.hover({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+        backgroundColor:
+          theme.colorScheme === "dark"
+            ? theme.colors.dark[7]
+            : theme.colors.gray[0],
       }),
 
-      '&:active': theme.activeStyles,
+      "&:active": theme.activeStyles,
     },
 
     dropdownFooter: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[7]
+          : theme.colors.gray[0],
       margin: `calc(${theme.spacing.md} * -1)`,
       marginTop: theme.spacing.sm,
       padding: `${theme.spacing.md} calc(${theme.spacing.md} * 2)`,
       paddingBottom: theme.spacing.xl,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[5]
+          : theme.colors.gray[1]
       }`,
     },
 
     hiddenMobile: {
-      [theme.fn.smallerThan('sm')]: {
-        display: 'none',
+      [theme.fn.smallerThan("sm")]: {
+        display: "none",
       },
     },
 
     hiddenDesktop: {
-      [theme.fn.largerThan('sm')]: {
-        display: 'none',
+      [theme.fn.largerThan("sm")]: {
+        display: "none",
       },
     },
   };
@@ -101,38 +113,39 @@ const useStyles = createStyles((theme) => {
 const mockdata = [
   {
     icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
+    title: "Open source",
+    description: "This Pokémon’s cry is very loud and distracting",
   },
   {
     icon: IconCoin,
-    title: 'Free for everyone',
-    description: 'The fluid of Smeargle’s tail secretions changes',
+    title: "Free for everyone",
+    description: "The fluid of Smeargle’s tail secretions changes",
   },
   {
     icon: IconBook,
-    title: 'Documentation',
-    description: 'Yanma is capable of seeing 360 degrees without',
+    title: "Documentation",
+    description: "Yanma is capable of seeing 360 degrees without",
   },
   {
     icon: IconFingerprint,
-    title: 'Security',
-    description: 'The shell’s rounded shape and the grooves on its.',
+    title: "Security",
+    description: "The shell’s rounded shape and the grooves on its.",
   },
   {
     icon: IconChartPie3,
-    title: 'Analytics',
-    description: 'This Pokémon uses its flying ability to quickly chase',
+    title: "Analytics",
+    description: "This Pokémon uses its flying ability to quickly chase",
   },
   {
     icon: IconNotification,
-    title: 'Notifications',
-    description: 'Combusken battles with the intensely hot flames it spews',
+    title: "Notifications",
+    description: "Combusken battles with the intensely hot flames it spews",
   },
 ];
 
 export function HeaderMegaMenu({ role }) {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
+    useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
 
@@ -158,28 +171,32 @@ export function HeaderMegaMenu({ role }) {
     <Box pb={80}>
       <Header height={60} px="md">
         <Container size="lg" className={classes.headerInner}>
-          <Group position="apart" sx={{ height: '100%' }}>
+          <Group position="apart" sx={{ height: "100%" }}>
             <p>Logo</p>
 
-            <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-              <a href="#" className={classes.link}>
+            <Group
+              sx={{ height: "100%" }}
+              spacing={0}
+              className={classes.hiddenMobile}
+            >
+              <Link to="#" className={classes.link}>
                 Маркет
-              </a>
-              <a href="#" className={classes.link}>
+              </Link>
+              <Link to="#" className={classes.link}>
                 Фермеры
-              </a>
-              {role === 'farmer' && (
-                <a href="#" className={classes.link}>
+              </Link>
+              {role === "farmer" && (
+                <Link to="#" className={classes.link}>
                   Мои товары
-                </a>
+                </Link>
               )}
-              <a href="#" className={classes.link}>
+              <Link to="chats" className={classes.link}>
                 Чат
-              </a>
-              {role === 'farmer' && (
-                <a href="#" className={classes.link}>
+              </Link>
+              {role === "farmer" && (
+                <Link to="#" className={classes.link}>
                   Фермерам
-                </a>
+                </Link>
               )}
             </Group>
 
@@ -205,34 +222,40 @@ export function HeaderMegaMenu({ role }) {
         padding="md"
         title="Навигация"
         className={classes.hiddenDesktop}
-        zIndex={1000000}>
+        zIndex={1000000}
+      >
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
-
-          <a href="#" className={classes.link}>
+          <Divider
+            my="sm"
+            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+          />
+          <Link to="#" className={classes.link}>
             Маркет
-          </a>
-          <a href="#" className={classes.link}>
+          </Link>
+          <Link to="#" className={classes.link}>
             Фермеры
-          </a>
-          {role === 'farmer' && (
-            <a href="#" className={classes.link}>
+          </Link>
+          {role === "farmer" && (
+            <Link to="#" className={classes.link}>
               Мои товары
-            </a>
+            </Link>
           )}
-          <a href="#" className={classes.link}>
+          <Link to="chats" className={classes.link}>
             Чат
-          </a>
-          {role === 'farmer' && (
-            <a href="#" className={classes.link}>
+          </Link>
+          {role === "farmer" && (
+            <Link to="#" className={classes.link}>
               Фермерам
-            </a>
+            </Link>
           )}
-          <a href="#" className={classes.link}>
+          <Link to="#" className={classes.link}>
             Профиль
-          </a>
+          </Link>
 
-          <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
+          <Divider
+            my="sm"
+            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+          />
 
           <Group position="center" grow pb="xl" px="md">
             <Button variant="default">Выйти</Button>

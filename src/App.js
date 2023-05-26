@@ -14,42 +14,48 @@ function App() {
   const isAuth = user !== null;
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
 
     if (token) {
       $api.getMe()
         .then(({ data }) => dispatch(userActions.setUser(data)))
     }
-  }, [])
+  }, []);
 
   // arbimerhzoev@mail.ru
   return (
     <div className="app">
       <Routes>
         {isAuth ? (
-          user.role === 'user' ? (
-            <Route path={'/'} element={<AuthLayout />}>
+          user.role === "user" ? (
+            <Route path={"/"} element={<AuthLayout />}>
               <Route index element={<div>home page</div>} />
-              <Route path="/login" element={<Navigate to={'/'} />} />
+              <Route path="/login" element={<Navigate to={"/"} />} />
+              <Route path="/chats" element={<ChatPage />} />
+              <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
-          ) : user.role === 'farmer' ? (
-            <Route path={'/'} element={<FarmerLayout />}>
+          ) : user.role === "farmer" ? (
+            <Route path={"/"} element={<FarmerLayout />}>
               <Route index element={<div>home page</div>} />
-              <Route path="/login" element={<Navigate to={'/'} />} />
+              <Route path="/login" element={<Navigate to={"/"} />} />
+              <Route path="chats" element={<ChatPage />} />
+              <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
-          ) : user.role === 'admin' ? (
-            <Route path={'/'} element={<FarmerLayout />}>
+          ) : user.role === "admin" ? (
+            <Route path={"/"} element={<FarmerLayout />}>
               <Route index element={<div>home page</div>} />
-              <Route path="/login" element={<Navigate to={'/'} />} />
+              <Route path="/login" element={<Navigate to={"/"} />} />
+              <Route path="chats" element={<ChatPage />} />
+              <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : null
         ) : (
           <>
-            <Route path={'/login'} element={<AuthenticationPage />} />
-            <Route path="*" element={<Navigate to={'/login'} />} />
+            <Route path={"/login"} element={<AuthenticationPage />} />
+            <Route path="*" element={<Navigate to={"/login"} />} />
           </>
         )}
       </Routes>
