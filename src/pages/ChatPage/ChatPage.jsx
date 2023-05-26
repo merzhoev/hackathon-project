@@ -68,7 +68,6 @@ export function ChatPage() {
   const id = useParams().id;
   const [messages, setMessages] = useState();
   const [messagesText, setMessagesText] = useState("");
-
   useEffect(() => {
     if (id === "1") {
       setMessages(messagesDataAdam);

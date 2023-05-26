@@ -7,6 +7,7 @@ import { AuthenticationPage } from "pages/AuthenticationPage";
 import { AuthLayout } from "layouts/AuthLayout";
 import { FarmerLayout } from "layouts/FarmerLayout";
 import { ChatPage } from "pages/ChatPage";
+import { FarmersPage } from "pages/Farmers";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="/chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
+              <Route path="/farmers" element={<FarmersPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : user.role === "farmer" ? (
@@ -46,6 +48,7 @@ function App() {
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
+              <Route path="/farmers" element={<FarmersPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : user.role === "admin" ? (
@@ -54,6 +57,7 @@ function App() {
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
+              <Route path="/farmers" element={<FarmersPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : null

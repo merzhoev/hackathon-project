@@ -1,0 +1,40 @@
+.farmersCardWrapp {
+  display: flex;
+  margin: 5px;
+  flex-direction: column;
+  border: 0.0625rem solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 300px;
+  height: 400px;
+}
+.avatar {
+  width: 300px;
+  height: 250px;
+  object-fit: cover;
+  background-color: #e9ecef;
+}
+.farmersBox {
+  padding: 12px;
+}
+.raitingBox {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+}
+.linkCard {
+  margin-top: 15px;
+  text-decoration: none;
+  background-color: #40c057;
+  border-radius: 8px;
+  color: white;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+  outline: none;
+}
+.linkCard:hover {
+  background-color: #287d37;
+}

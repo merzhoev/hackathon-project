@@ -33,6 +33,7 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+import Logo from "assets/image/Logo.svg";
 
 const useStyles = createStyles((theme) => {
   return {
@@ -172,8 +173,16 @@ export function HeaderMegaMenu({ role }) {
       <Header height={60} px="md">
         <Container size="lg" className={classes.headerInner}>
           <Group position="apart" sx={{ height: "100%" }}>
-            <p>Logo</p>
-
+            <Link to={"/"}>
+              <img
+                src={Logo}
+                style={{
+                  width: 75,
+                  height: 65,
+                }}
+                alt="Logo"
+              />
+            </Link>
             <Group
               sx={{ height: "100%" }}
               spacing={0}
@@ -182,7 +191,7 @@ export function HeaderMegaMenu({ role }) {
               <Link to="#" className={classes.link}>
                 Маркет
               </Link>
-              <Link to="#" className={classes.link}>
+              <Link to={"farmers"} className={classes.link}>
                 Фермеры
               </Link>
               {role === "farmer" && (
@@ -232,7 +241,7 @@ export function HeaderMegaMenu({ role }) {
           <Link to="#" className={classes.link}>
             Маркет
           </Link>
-          <Link to="#" className={classes.link}>
+          <Link to={"farmers"} className={classes.link}>
             Фермеры
           </Link>
           {role === "farmer" && (
