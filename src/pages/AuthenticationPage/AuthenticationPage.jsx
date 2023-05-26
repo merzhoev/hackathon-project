@@ -3,7 +3,6 @@ import {
   createStyles,
   TextInput,
   PasswordInput,
-  Checkbox,
   Button,
   Title,
   Text,
@@ -15,13 +14,15 @@ import {
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
 import { useState } from 'react';
+import villageImage from 'assets/images/village.jpg';
+import { $api } from 'api/services';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginThunk, registerThunk } from 'store/slices/userSlice';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    minHeight: rem(900),
     backgroundSize: 'cover',
-    backgroundImage:
-      'url(https://images.unsplash.com/photo-1484242857719-4b9144542727?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1280&q=80)',
+    backgroundImage: `url(${villageImage})`,
   },
 
   form: {
@@ -45,7 +46,9 @@ const useStyles = createStyles((theme) => ({
 
 export function AuthenticationPage() {
   const { classes } = useStyles();
-  const [role, setRole] = useState({ value: 'farmer', title: 'Фермер' });
+  const dispatch = useDispatch();
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+  const [role, setRole] = useState({ value: 'user', title: 'Пользователь' });
   const [type, toggleType] = useToggle([
     { value: 'login', title: 'Вход', buttonTitle: 'Зарегистрироваться' },
     { value: 'register', title: 'Регистрация', buttonTitle: 'Войти' },
@@ -58,18 +61,25 @@ export function AuthenticationPage() {
     },
 
     validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Некорректный email'),
+      name: (val) => {
+        if (type.value === 'login') {
+          return null;
+        }
+
+        return val.trim().length ? null : 'Поле обязательное';
+      },
+      email: (val) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) ? null : 'Некорректный email'),
       password: (val) => (val.length < 6 ? 'Пароль должен содержать не менее 6 символов' : null),
     },
   });
 
-  const toggleRole = () => {
-    const newRole =
-      role.value === 'farmer'
-        ? { value: 'user', title: 'Пользователь' }
-        : { value: 'farmer', title: 'Фермер' };
+  const onChangeRole = (value) => {
+    const titleByValue = {
+      user: 'Пользователь',
+      farmer: 'Фермер',
+    };
 
-    setRole(newRole);
+    setRole({ value, title: titleByValue[value] });
   };
 
   const onToggleType = (event) => {
@@ -81,15 +91,20 @@ export function AuthenticationPage() {
 
   const onFormSubmit = (data) => {
     if (type.value === 'register') {
+      const registerData = { ...data, role: role.value };
+
+      dispatch(registerThunk(registerData));
     }
 
     if (type.value === 'login') {
       const { name, ...loginData } = data;
+
+      dispatch(loginThunk(loginData));
     }
   };
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.wrapper} style={{ maxHeight: '100vh', overflow: 'hidden' }}>
       <Paper className={classes.form} radius={0} p={30}>
         {type.value === 'login' ? (
           <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
@@ -100,7 +115,7 @@ export function AuthenticationPage() {
             <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
               {type.title}
             </Title>
-            <Tabs defaultValue="user">
+            <Tabs mb="lg" onTabChange={onChangeRole} value={role.value}>
               <Tabs.List>
                 <Tabs.Tab sx={{ width: '50%' }} value="user">
                   Пользователь
@@ -109,14 +124,6 @@ export function AuthenticationPage() {
                   Фермер
                 </Tabs.Tab>
               </Tabs.List>
-
-              <Tabs.Panel value="user" pt="xs">
-                user login
-              </Tabs.Panel>
-
-              <Tabs.Panel value="farmer" pt="xs">
-                farmer login
-              </Tabs.Panel>
             </Tabs>
           </>
         )}
@@ -129,6 +136,7 @@ export function AuthenticationPage() {
                 placeholder="Ваше имя"
                 value={form.values.name}
                 onChange={(event) => form.setFieldValue('name', event.currentTarget.value)}
+                error={form.errors.name}
                 size="md"
               />
             )}
@@ -148,8 +156,15 @@ export function AuthenticationPage() {
               error={form.errors.password}
               size="md"
             />
+
+            {errorMessage !== null && (
+              <Text align="center" color="red">
+                {errorMessage}
+              </Text>
+            )}
+
             <Button type="submit" fullWidth mt="md" size="md">
-              Войти
+              {type.value === 'login' ? 'Войти' : 'Зарегистрироваться'}
             </Button>
           </Stack>
         </form>
