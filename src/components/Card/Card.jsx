@@ -1,35 +1,19 @@
-import styles from "./card.module.css";
-import {
-  Card,
-  Image,
-  Text,
-  Group,
-  Badge,
-  createStyles,
-  Center,
-  Button,
-  rem,
-} from "@mantine/core";
-import {
-  IconGasStation,
-  IconGauge,
-  IconManualGearbox,
-  IconUsers,
-} from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import styles from './card.module.css';
+import { Card, Image, Text, Group, Badge, createStyles, Center, Button, rem } from '@mantine/core';
+import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-    maxWidth: "325px",
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    maxWidth: '325px',
   },
 
   imageSection: {
     padding: theme.spacing.md,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   label: {
@@ -38,38 +22,35 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 700,
     fontSize: theme.fontSizes.xs,
     letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
 
   section: {
     padding: theme.spacing.md,
     borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
   },
 
   icon: {
     marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
   },
 
   link: {
-    display: "flex",
-    textDecoration: "none",
-    color: "#adb5bd",
+    display: 'flex',
+    textDecoration: 'none',
+    color: '#adb5bd',
     '&:hover': {
-      color: "#000"
-    }
+      color: '#000',
+    },
   },
 }));
 
 const mockdata = {
-  farm: "Ферма большого дядюшки Джо",
-  title: "яблоки",
-  description: "Вкусные, сочные яблоки",
+  farm: 'Ферма большого дядюшки Джо',
+  title: 'яблоки',
+  description: 'Вкусные, сочные яблоки',
 };
 
 export const ProductCard = ({ id, title, description, farm, img, price }) => {
@@ -95,11 +76,7 @@ export const ProductCard = ({ id, title, description, farm, img, price }) => {
           {
             <Center key={id}>
               <Link className={classes.link}>
-                <IconUsers
-                  size="1.05rem"
-                  className={classes.icon}
-                  stroke={1.5}
-                />
+                <IconUsers size="1.05rem" className={classes.icon} stroke={1.5} />
                 <Text size="xs">{farm}</Text>
               </Link>
             </Center>
@@ -111,7 +88,7 @@ export const ProductCard = ({ id, title, description, farm, img, price }) => {
         <Group spacing={30}>
           <div>
             <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
-              ${price}
+              &#8381; {price}
             </Text>
             <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
               за кг
