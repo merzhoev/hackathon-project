@@ -10,6 +10,7 @@ import { MarketPage } from "pages/MarketPage";
 import { $api } from "api/services";
 import { ChatPage } from "pages/ChatPage";
 import { FarmersPage } from "pages/Farmers";
+import { CartPage } from "pages/CartPage";
 import { MyProductsPage } from "pages/MyProductsPage";
 
 function App() {
@@ -25,8 +26,7 @@ function App() {
         .then(({ data }) => dispatch(userActions.setUser(data)))
     }
   }, []);
-
-  console.log(user)
+  
   return (
     <div className="app">
       <Routes>
@@ -38,6 +38,7 @@ function App() {
               <Route path="/chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="/farmers" element={<FarmersPage />} />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : user.role === "farmer" ? (

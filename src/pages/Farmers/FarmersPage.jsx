@@ -7,12 +7,12 @@ import { Text } from "@mantine/core";
 
 const filter = [
   {
-    label: "По рейтингу",
-    image: <IconArrowsDownUp size={22} strokeWidth={2} color={"#40c057"} />,
+    label: 'По рейтингу',
+    image: <IconArrowsDownUp size={22} strokeWidth={2} color={'#40c057'} />,
   },
   {
-    label: "По алфавиту",
-    image: <IconAlphabetCyrillic size={22} strokeWidth={2} color={"#40c057"} />,
+    label: 'По алфавиту',
+    image: <IconAlphabetCyrillic size={22} strokeWidth={2} color={'#40c057'} />,
   },
 ];
 // const data = [
@@ -23,22 +23,22 @@ const filter = [
 //   },
 // ];
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem('token');
 
 export function FarmersPage() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios({
-      method: "GET",
+      method: 'GET',
       url: `http://fb7960l1.beget.tech/api/users`,
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         Authorization: `Bearer ${token}`,
-        "User-Token": 1,
+        'User-Token': 1,
       },
     }).then((res) => {
-      setData(res.data);
+      setData(res.data.slice(0, 23));
     });
   }, []);
 
