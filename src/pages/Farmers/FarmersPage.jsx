@@ -1,8 +1,9 @@
-import { FarmersCard, FarmersFilter } from 'components/Farmers';
-import React, { useEffect, useState } from 'react';
-import style from './Farmers.module.css';
-import { IconArrowsDownUp, IconAlphabetCyrillic } from '@tabler/icons-react';
-import axios from 'axios';
+import { FarmersCard, FarmersFilter } from "components/Farmers";
+import React, { useEffect, useState } from "react";
+import style from "./Farmers.module.css";
+import { IconArrowsDownUp, IconAlphabetCyrillic } from "@tabler/icons-react";
+import axios from "axios";
+import { Text } from "@mantine/core";
 
 const filter = [
   {
@@ -43,11 +44,16 @@ export function FarmersPage() {
 
   return (
     <div className={style.farmersPage}>
-      <FarmersFilter data={filter} />
+      <div className={style.farmersFilter}>
+        <Text fz="xl" fw={700}>
+          Список всех фермеров
+        </Text>
+        <FarmersFilter data={filter} />
+      </div>
       <div className={style.fermersMass}>
         {data.map((item) => {
           if (item.rating) {
-            return <FarmersCard item={item} />;
+            return <FarmersCard item={item} key={item.id} />;
           }
         })}
       </div>

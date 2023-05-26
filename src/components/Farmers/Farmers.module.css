@@ -1,16 +1,15 @@
 .farmersCardWrapp {
   display: flex;
-  margin: 5px;
+  margin: 8px;
   flex-direction: column;
   border: 0.0625rem solid #e9ecef;
   border-radius: 8px;
   overflow: hidden;
-  width: 300px;
-  height: 400px;
+  width: 350px;
 }
 .avatar {
-  width: 300px;
-  height: 250px;
+  width: 350px;
+  height: 300px;
   object-fit: cover;
   background-color: #e9ecef;
 }
@@ -37,4 +36,30 @@
 }
 .linkCard:hover {
   background-color: #287d37;
+}
+.editButtonCard {
+  width: 100%;
+  border: none;
+  margin-top: 15px;
+  text-decoration: none;
+  background-color: #40c057;
+  border-radius: 8px;
+  color: white;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.editButtonCard:hover {
+  background-color: #287d37;
+}
+.modalInput {
+  margin-bottom: 10px;
+}
+.ButtonModalBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

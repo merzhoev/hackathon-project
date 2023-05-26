@@ -11,6 +11,7 @@ import { $api } from "api/services";
 import { ChatPage } from "pages/ChatPage";
 import { FarmersPage } from "pages/Farmers";
 import { CartPage } from "pages/CartPage";
+import { MyProductsPage } from "pages/MyProductsPage";
 
 function App() {
   const dispatch = useDispatch()
@@ -25,8 +26,7 @@ function App() {
         .then(({ data }) => dispatch(userActions.setUser(data)))
     }
   }, []);
-
-  // arbimerhzoev@mail.ru
+  
   return (
     <div className="app">
       <Routes>
@@ -43,12 +43,12 @@ function App() {
             </Route>
           ) : user.role === "farmer" ? (
             <Route path={"/"} element={<FarmerLayout />}>
-
               <Route index element={<MarketPage />} />
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="/farmers" element={<FarmersPage />} />
+              <Route path="/MyProducts" element={<MyProductsPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : user.role === "admin" ? (
