@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const BASE_URL = 'http://localhost:3000/'
-const BASE_URL = 'http://fb7960l1.beget.tech/api/'
+const BASE_URL = 'http://erdune.com:4432/api/'
 
 export const instance = axios.create({
   baseURL: BASE_URL,
