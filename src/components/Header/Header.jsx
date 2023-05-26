@@ -32,6 +32,7 @@ import {
   IconAdjustments,
   IconUser,
 } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => {
   return {
@@ -159,12 +160,10 @@ export function HeaderMegaMenu({ role }) {
       <Header height={60} px="md">
         <Container size="lg" className={classes.headerInner}>
           <Group position="apart" sx={{ height: '100%' }}>
-            <p>Logo</p>
+            <Link to='/'><p>Logo</p></Link>
 
             <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-              <a href="#" className={classes.link}>
-                Маркет
-              </a>
+              <Link className={classes.link} to='/'>Маркет</Link>
               <a href="#" className={classes.link}>
                 Фермеры
               </a>
@@ -209,9 +208,7 @@ export function HeaderMegaMenu({ role }) {
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
-          <a href="#" className={classes.link}>
-            Маркет
-          </a>
+          <Link className={classes.link} to='/'>Маркет</Link>
           <a href="#" className={classes.link}>
             Фермеры
           </a>
