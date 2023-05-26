@@ -16,8 +16,6 @@ function App() {
   const user = useSelector(state => state.user.user)
   const isAuth = user !== null;
 
-  console.log(user)
-
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -26,8 +24,6 @@ function App() {
         .then(({ data }) => dispatch(userActions.setUser(data)))
     }
   }, []);
-
-  console.log(user)
 
   // arbimerhzoev@mail.ru
   return (

@@ -11,6 +11,10 @@ export const $api = {
 
   getMe() {
     return instance.post('auth/me')
+  },
+
+  getProducts() {
+    return instance.get('products')
   }
 }
 
