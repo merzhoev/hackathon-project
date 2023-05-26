@@ -1,15 +1,15 @@
 import styles from "./category.module.css";
 
-export const Category = ({title, img}) => {
+export const Category = ({name, image_path}) => {
   return (
     <div
       className={styles.category}
       style={{
         backgroundImage:
-          `url(${img})`,
+          `url(${image_path})`,
       }}
     >
-      {title}
+      {name}
       <div className={styles.backgroundblock}></div>
     </div>
   );

@@ -61,7 +61,7 @@ const useStyles = createStyles((theme) => ({
     textDecoration: "none",
     color: "#adb5bd",
     '&:hover': {
-      color: "#000"
+      color: "#464C52"
     }
   },
 }));
@@ -78,7 +78,7 @@ export const ProductCard = ({ id, title, description, farm, img, price }) => {
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image src={img} alt="Product" />
+        <Image radius="md" src={img} alt="Product" />
       </Card.Section>
 
       <Group position="apart" mt="md">
