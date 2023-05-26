@@ -35,6 +35,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userActions } from 'store/slices/userSlice';
+import Logo from "assets/image/Logo.svg";
 
 const useStyles = createStyles((theme) => {
   return {
@@ -163,14 +164,27 @@ export function HeaderMegaMenu({ role }) {
     <Box pb={80}>
       <Header height={60} px="md">
         <Container size="lg" className={classes.headerInner}>
-          <Group position="apart" sx={{ height: '100%' }}>
-            <p>Logo</p>
+          <Group position="apart" sx={{ height: "100%" }}>
+            <Link to={"/"}>
+              <img
+                src={Logo}
+                style={{
+                  width: 75,
+                  height: 65,
+                }}
+                alt="Logo"
+              />
+            </Link>
+            <Group
+              sx={{ height: "100%" }}
+              spacing={0}
+              className={classes.hiddenMobile}
+            >
 
-            <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
               <Link to="#" className={classes.link}>
                 Маркет
               </Link>
-              <Link to="#" className={classes.link}>
+              <Link to={"farmers"} className={classes.link}>
                 Фермеры
               </Link>
               {role === 'farmer' && (
@@ -218,7 +232,7 @@ export function HeaderMegaMenu({ role }) {
           <Link to="#" className={classes.link}>
             Маркет
           </Link>
-          <Link to="#" className={classes.link}>
+          <Link to={"farmers"} className={classes.link}>
             Фермеры
           </Link>
           {role === 'farmer' && (

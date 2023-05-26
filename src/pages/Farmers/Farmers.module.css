@@ -1,0 +1,9 @@
+.farmersPage {
+  display: flex;
+  flex-direction: column;
+}
+.fermersMass {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+}
