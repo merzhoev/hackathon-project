@@ -26,7 +26,7 @@ function App() {
         .then(({ data }) => dispatch(userActions.setUser(data)))
     }
   }, []);
-  
+
   return (
     <div className="app">
       <Routes>
@@ -48,6 +48,7 @@ function App() {
               <Route path="chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="/farmers" element={<FarmersPage />} />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="/MyProducts" element={<MyProductsPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
