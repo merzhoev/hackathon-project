@@ -17,6 +17,7 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+import noImage from "assets/images/no-image.svg";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -60,9 +61,9 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     textDecoration: "none",
     color: "#adb5bd",
-    '&:hover': {
-      color: "#464C52"
-    }
+    "&:hover": {
+      color: "#464C52",
+    },
   },
 }));
 
@@ -72,18 +73,18 @@ const mockdata = {
   description: "Вкусные, сочные яблоки",
 };
 
-export const ProductCard = ({ id, title, description, farm, img, price }) => {
+export const ProductCard = ({ id, name, description, farm, img, price }) => {
   const { classes } = useStyles();
 
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image radius="md" src={img} alt="Product" />
+        <Image radius="md" src={img ? img : noImage} alt="Product" />
       </Card.Section>
 
       <Group position="apart" mt="md">
         <div>
-          <Text fw={500}>{title}</Text>
+          <Text fw={500}>{name}</Text>
           <Text fz="xs" c="dimmed">
             {description}
           </Text>
@@ -111,7 +112,7 @@ export const ProductCard = ({ id, title, description, farm, img, price }) => {
         <Group spacing={30}>
           <div>
             <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
-              ${price}
+              ₽{price}
             </Text>
             <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
               за кг

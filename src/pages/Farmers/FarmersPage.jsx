@@ -15,13 +15,6 @@ const filter = [
     image: <IconAlphabetCyrillic size={22} strokeWidth={2} color={"#40c057"} />,
   },
 ];
-// const data = [
-//   {
-//     name: "Иванов Иван Иванович",
-//     avatar: "https://i.pravatar.cc/302",
-//     raiting: 5,
-//   },
-// ];
 
 const token = localStorage.getItem("token");
 
