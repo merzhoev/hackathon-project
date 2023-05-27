@@ -9,22 +9,21 @@ import { FarmerLayout } from "layouts/FarmerLayout";
 import { MarketPage } from "pages/MarketPage";
 import { $api } from "api/services";
 import { ChatPage } from "pages/ChatPage";
-import { FarmersPage } from "pages/Farmers";
+import { FarmersPage, FarmersProfilePage } from "pages/Farmers";
 import { CartPage } from "pages/CartPage";
 import { MyProductsPage } from "pages/MyProductsPage";
 import { CategoryPage } from "pages/CategoryPage";
 
 function App() {
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.user.user)
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const isAuth = user !== null;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      $api.getMe()
-        .then(({ data }) => dispatch(userActions.setUser(data)))
+      $api.getMe().then(({ data }) => dispatch(userActions.setUser(data)));
     }
   }, []);
 
@@ -40,6 +39,10 @@ function App() {
               <Route path="/chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="/farmers" element={<FarmersPage />} />
+              <Route
+                path="/farmers/profile/:id"
+                element={<FarmersProfilePage />}
+              />
               <Route path="/cart" element={<CartPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
@@ -50,6 +53,10 @@ function App() {
               <Route path="chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="/farmers" element={<FarmersPage />} />
+              <Route
+                path="/farmers/profile/:id"
+                element={<FarmersProfilePage />}
+              />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/MyProducts" element={<MyProductsPage />} />
               <Route path="*" element={<NotFoundPage />} />
@@ -62,6 +69,10 @@ function App() {
               <Route path="chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
               <Route path="/farmers" element={<FarmersPage />} />
+              <Route
+                path="/farmers/profile/:id"
+                element={<FarmersProfilePage />}
+              />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           ) : null

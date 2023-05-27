@@ -1,4 +1,6 @@
+
 import styles from './card.module.css';
+import noImage from "assets/images/no-image.svg";
 import { Card, Image, Text, Group, Badge, createStyles, Center, Button, rem } from '@mantine/core';
 import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,6 +57,7 @@ const mockdata = {
   description: 'Вкусные, сочные яблоки',
 };
 
+
 export const ProductCard = ({ id, name, description, fermer, image_path, price }) => {
   const { classes } = useStyles();
   const dispatch = useDispatch();
@@ -76,7 +79,8 @@ export const ProductCard = ({ id, name, description, fermer, image_path, price }
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image height={250} width={290} radius="md" src={image_path} alt="Product" />
+
+        <Image height={250} width={290} radius="md" src={image_path ? image_path : noImage} alt="Product" />
       </Card.Section>
 
       <Group position="apart" mt="md">
@@ -110,7 +114,7 @@ export const ProductCard = ({ id, name, description, fermer, image_path, price }
         <Group spacing={30}>
           <div>
             <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
-              ${price}
+              ₽{price}
             </Text>
             <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
               за кг

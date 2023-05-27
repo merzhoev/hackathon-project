@@ -5,11 +5,11 @@
   border: 0.0625rem solid #e9ecef;
   border-radius: 8px;
   overflow: hidden;
-  width: 350px;
+  width: 260px;
 }
 .avatar {
-  width: 350px;
-  height: 300px;
+  width: 260px;
+  height: 250px;
   object-fit: cover;
   background-color: #e9ecef;
 }
@@ -62,4 +62,5 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 25px;
 }

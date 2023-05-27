@@ -21,7 +21,7 @@ export function FarmersCard({ item }) {
           Рейтинг:
           <Rating value={item.rating} style={{ marginLeft: 8 }} readOnly />
         </Text>
-        <Link to={"#"} className={style.linkCard}>
+        <Link to={`/farmers/profile/${item.id}`} className={style.linkCard}>
           Перейти на профиль
           <IconArrowNarrowRight size={24} strokeWidth={2} color={"white"} />
         </Link>
