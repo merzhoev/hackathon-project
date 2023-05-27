@@ -53,9 +53,10 @@ export function FarmersModalCard({
   }, []);
 
   const handleAddProduct = () => {
+    console.log(value);
     if (
       item.name.length > 2 &&
-      item.price.length > 2 &&
+      item.price.length > 0 &&
       item.description.length > 2 &&
       value
     ) {
@@ -87,7 +88,7 @@ export function FarmersModalCard({
   const handleEditProduct = () => {
     if (
       item.name.length > 2 &&
-      item.price.length > 2 &&
+      item.price.length > 0 &&
       item.description.length > 2 &&
       value
     ) {
@@ -164,9 +165,9 @@ export function FarmersModalCard({
           <Button
             onClick={handleAddProduct}
             disabled={
-              item.name.length < 2 ||
-              item.price.length < 2 ||
-              item.description.length < 2 ||
+              item.name.length < 3 ||
+              item.price.length < 1 ||
+              item.description.length < 3 ||
               !value
             }
           >
@@ -177,9 +178,9 @@ export function FarmersModalCard({
             <Button
               onClick={handleEditProduct}
               disabled={
-                item.name.length < 2 ||
-                item.price.length < 2 ||
-                item.description.length < 2 ||
+                item.name.length < 3 ||
+                item.price.length < 1 ||
+                item.description.length < 3 ||
                 !value
               }
             >

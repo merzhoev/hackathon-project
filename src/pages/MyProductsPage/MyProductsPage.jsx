@@ -28,6 +28,13 @@ const filter = [
   },
 ];
 
+const images = [
+  "https://resizer.mail.ru/p/06568562-b3c1-5fbe-937b-a54599702ae0/AAAcfIsJ9WTZnmreGENojDxxT8d2zLC1Vp4PhnPZdACXirhjtt4kVFbDAIWcnO-zfkQgJK6hCLo_awSPGLa69pB2l4A.jpg",
+  "https://s7.stc.all.kpcdn.net/family/wp-content/uploads/2022/02/ogurzi_polza_i_vred_oblogka_960-960x540.jpg",
+  "https://resizer.mail.ru/p/0871f530-544a-57f0-ab25-b6e7447ded0e/AAAcYqsct6nrC_EimcGyJucC6SExnRckiOOXjgeWgVq4cumT4lYSeOJnf90DcOPx6ala3fS_BXqdHA0wzdzEk8YiBKs.jpg",
+  `https://www.43.rospotrebnadzor.ru/news/2021/san_230821_1.jpg`,
+];
+
 const token = localStorage.getItem("token");
 
 export function MyProductsPage() {
@@ -85,7 +92,8 @@ export function MyProductsPage() {
         currentItem={currentItem}
       />
       <div className={style.fermersMass} style={{ gap: 12 }}>
-        {data.map((item) => {
+        {data.map((item, idx) => {
+          item.image_path = images[idx];
           return (
             <FarmersProductCard
               item={item}

@@ -67,8 +67,8 @@ export const ProductCard = ({ id, name, description, fermer, image_path, price }
   const onAddClick = () => {
     const card = {
       id,
-      title,
-      imageUrl: img,
+      title: name,
+      imageUrl: image_path,
       pricePerOne: price,
       amount: 1,
     };
