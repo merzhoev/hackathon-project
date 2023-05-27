@@ -1,36 +1,23 @@
-import styles from "./card.module.css";
-import {
-  Card,
-  Image,
-  Text,
-  Group,
-  Badge,
-  createStyles,
-  Center,
-  Button,
-  rem,
-} from "@mantine/core";
-import {
-  IconGasStation,
-  IconGauge,
-  IconManualGearbox,
-  IconUsers,
-} from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+
+import styles from './card.module.css';
 import noImage from "assets/images/no-image.svg";
+import { Card, Image, Text, Group, Badge, createStyles, Center, Button, rem } from '@mantine/core';
+import { IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { cartActions } from 'store/slices/cartSlice';
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-    maxWidth: "325px",
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    maxWidth: '325px',
   },
 
   imageSection: {
     padding: theme.spacing.md,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   label: {
@@ -39,47 +26,61 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 700,
     fontSize: theme.fontSizes.xs,
     letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
 
   section: {
     padding: theme.spacing.md,
     borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
   },
 
   icon: {
     marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
   },
 
   link: {
-    display: "flex",
-    textDecoration: "none",
-    color: "#adb5bd",
-    "&:hover": {
-      color: "#464C52",
+    display: 'flex',
+    textDecoration: 'none',
+    color: '#adb5bd',
+    '&:hover': {
+      color: '#464C52',
     },
   },
 }));
 
 const mockdata = {
-  farm: "Ферма большого дядюшки Джо",
-  title: "яблоки",
-  description: "Вкусные, сочные яблоки",
+  farm: 'Ферма большого дядюшки Джо',
+  title: 'яблоки',
+  description: 'Вкусные, сочные яблоки',
 };
 
-export const ProductCard = ({ id, name, description, farm, img, price }) => {
+
+export const ProductCard = ({ id, name, description, fermer, image_path, price }) => {
   const { classes } = useStyles();
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.cart.products);
+  const isFavorited = products.some((product) => product.id === id);
+
+  const onAddClick = () => {
+    const card = {
+      id,
+      title,
+      imageUrl: img,
+      pricePerOne: price,
+      amount: 1,
+    };
+
+    dispatch(cartActions.addCard(card));
+  };
 
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image radius="md" src={img ? img : noImage} alt="Product" />
+
+        <Image height={250} width={290} radius="md" src={image_path ? image_path : noImage} alt="Product" />
       </Card.Section>
 
       <Group position="apart" mt="md">
@@ -101,7 +102,8 @@ export const ProductCard = ({ id, name, description, farm, img, price }) => {
                   className={classes.icon}
                   stroke={1.5}
                 />
-                <Text size="xs">{farm}</Text>
+                <Text size="xs">{fermer.name}</Text>
+
               </Link>
             </Center>
           }
@@ -119,9 +121,15 @@ export const ProductCard = ({ id, name, description, farm, img, price }) => {
             </Text>
           </div>
 
-          <Button size="xs" radius="xl" style={{ flex: 1 }}>
-            Добавить в корзину
-          </Button>
+          {isFavorited ? (
+            <Button variant="default" size="xs" radius="xl" style={{ flex: 1, cursor: 'default' }}>
+              В корзине
+            </Button>
+          ) : (
+            <Button onClick={onAddClick} size="xs" radius="xl" style={{ flex: 1 }}>
+              Добавить в корзину
+            </Button>
+          )}
         </Group>
       </Card.Section>
     </Card>

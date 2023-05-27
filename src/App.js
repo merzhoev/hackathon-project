@@ -12,6 +12,7 @@ import { ChatPage } from "pages/ChatPage";
 import { FarmersPage, FarmersProfilePage } from "pages/Farmers";
 import { CartPage } from "pages/CartPage";
 import { MyProductsPage } from "pages/MyProductsPage";
+import { CategoryPage } from "pages/CategoryPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
           user.role === "user" ? (
             <Route path={"/"} element={<AuthLayout />}>
               <Route index element={<MarketPage />} />
+              <Route path="/:id" element={<CategoryPage />} />
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="/chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
@@ -55,6 +57,7 @@ function App() {
                 path="/farmers/profile/:id"
                 element={<FarmersProfilePage />}
               />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="/MyProducts" element={<MyProductsPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>

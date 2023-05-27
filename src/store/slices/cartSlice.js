@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  products: localStorage.getItem('cartProducts') ?? []
+  products: JSON.parse(localStorage.getItem('cartProducts')) ?? []
 };
 
 export const cartSlice = createSlice({
@@ -10,12 +10,23 @@ export const cartSlice = createSlice({
   reducers: {
     addCard: (state, action) => {
       state.products.push(action.payload)
+
+      const products = JSON.parse(localStorage.getItem('cartProducts')) ?? []
+      products.push(action.payload)
+
+      localStorage.setItem('cartProducts', JSON.stringify(products))
     },
     clearCart: (state) => {
       state.products = []
+
+      localStorage.setItem('cartProducts', JSON.stringify([]))
     },
     removeOneCard: (state, action) => {
-      state.products = state.products.filter(({ id }) => id !== action.payload.id)
+      state.products = state.products.filter(({ id }) => id !== action.payload)
+
+      let products = JSON.parse(localStorage.getItem('cartProducts')) ?? []
+      products = products.filter(({ id }) => id !== action.payload)
+      localStorage.setItem('cartProducts', JSON.stringify(products))
     },
     plusProduct: (state, action) => {
       const item = state.products.find(({ id }) => id === action.payload)
@@ -25,6 +36,11 @@ export const cartSlice = createSlice({
       }
 
       item.amount++
+
+      let products = JSON.parse(localStorage.getItem('cartProducts')) ?? []
+      const productItem = products.find(({ id }) => id === action.payload)
+      productItem.amount = item.amount
+      localStorage.setItem('cartProducts', JSON.stringify(products))
     },
     minusProduct: (state, action) => {
       const item = state.products.find(({ id }) => id === action.payload)
@@ -33,7 +49,12 @@ export const cartSlice = createSlice({
         return
       }
 
-      item.amount = Math.max(0, item.amount - 1)
+      item.amount = Math.max(1, item.amount - 1)
+
+      let products = JSON.parse(localStorage.getItem('cartProducts')) ?? []
+      const productItem = products.find(({ id }) => id === action.payload)
+      productItem.amount = item.amount
+      localStorage.setItem('cartProducts', JSON.stringify(products))
     },
   },
 });
