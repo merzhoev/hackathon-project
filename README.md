@@ -1,5 +1,7 @@
 Адрес host - http://fb7960l1.beget.tech/
-
+Аккаунт фермера:
+email: fermer@mail.ru
+password: 123456
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
