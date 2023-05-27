@@ -49,6 +49,7 @@ function App() {
           ) : user.role === "farmer" ? (
             <Route path={"/"} element={<FarmerLayout />}>
               <Route index element={<MarketPage />} />
+              <Route path="/:id" element={<CategoryPage />} />
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
@@ -64,7 +65,7 @@ function App() {
           ) : user.role === "admin" ? (
             <Route path={"/"} element={<FarmerLayout />}>
               <Route index element={<MarketPage />} />
-              <Route index element={<div>home page</div>} />
+              <Route path="/:id" element={<CategoryPage />} />
               <Route path="/login" element={<Navigate to={"/"} />} />
               <Route path="chats" element={<ChatPage />} />
               <Route path="chats/chat/:id" element={<ChatPage />} />
