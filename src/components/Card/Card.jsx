@@ -72,18 +72,18 @@ const mockdata = {
   description: "Вкусные, сочные яблоки",
 };
 
-export const ProductCard = ({ id, title, description, farm, img, price }) => {
+export const ProductCard = ({ id, name, description, fermer, image_path, price }) => {
   const { classes } = useStyles();
 
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image radius="md" src={img} alt="Product" />
+        <Image height={250} width={290} radius="md" src={image_path} alt="Product" />
       </Card.Section>
 
       <Group position="apart" mt="md">
         <div>
-          <Text fw={500}>{title}</Text>
+          <Text fw={500}>{name}</Text>
           <Text fz="xs" c="dimmed">
             {description}
           </Text>
@@ -100,7 +100,7 @@ export const ProductCard = ({ id, title, description, farm, img, price }) => {
                   className={classes.icon}
                   stroke={1.5}
                 />
-                <Text size="xs">{farm}</Text>
+                <Text size="xs">{fermer.name}</Text>
               </Link>
             </Center>
           }
