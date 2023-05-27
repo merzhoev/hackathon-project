@@ -17,6 +17,9 @@ export const $api = {
   },
   getProducts() {
     return instance.get('products')
+  },
+  getCategoryProducts(id) {
+    return instance.get(`products/${id}`)
   }
 }
 
